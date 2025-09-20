@@ -18,6 +18,7 @@ Below each module is expanded with implementation details, rationale, pitfalls, 
 
 ### Functions & pins
 
+`````
 // Front
 const int triggerPinFront = 7;  
 const int echoPinFront = 8;
@@ -38,8 +39,8 @@ long readDistance(int triggerPin, int echoPin) {
   float time = pulseIn(echoPin, HIGH);
   float distance = (time/2)/29.1;
   return distance;  
-} 
-
+}
+`````
 ### Its function
 
 Each ultrasonic sensor (HC-SR04-style) measures distance to the nearest obstacle in its direction.
@@ -60,6 +61,7 @@ distance_cm = (pulseTime_us / 2) / 29.1
 
 ### Functions & pins
 
+`````
 const int IN1 = 28;   
 const int IN2 = 30;   
 const int ENA = 3;
@@ -69,6 +71,7 @@ void motorEncendido(int speed) {
   digitalWrite(IN2, LOW);  
   analogWrite(ENA, speed); 
 }
+`````
 
 ### Its function
 
