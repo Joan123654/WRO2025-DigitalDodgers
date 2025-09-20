@@ -1,5 +1,18 @@
 This repository contains **documentation, source code, team photos, vehicle photos, and 3D models**, all related to the complete engineering process for the **WRO Future Engineers 2025** competition.
 
+## Table of Contents  
+
+- [Future Engineers – WRO 2025](#future-engineers--wro-2025)
+- [CODE](#code)
+  - [Sensors Module](#sensors-module)
+    - [Functions & Pins](#functions--pins)
+    - [Its Function](#its-function)
+    - [Points to Take in Consider](#points-to-take-in-consider)
+  - [Motor Control Module](#motor-control-module)
+    - [Functions & Pins](#functions--pins-1)
+    - [Its Function](#its-function-1)
+    - [Points to Take in Consider](#points-to-take-in-consider-1)
+
 # Future Engineers – WRO 2025
 
 The Future Engineers category of the WRO 2025 focuses on developing real-world engineering skills through hands-on robotics challenges. This competition encourages creativity, problem-solving, and teamwork while giving participants the opportunity to design, build, and program advanced robotic systems.
