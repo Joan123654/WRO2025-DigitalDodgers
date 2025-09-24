@@ -12,6 +12,10 @@ This repository contains **documentation, source code, team photos, vehicle phot
     - [Functions & Pins](#functions--pins-1)
     - [Its Function](#its-function-1)
     - [Points to Take in Consider](#points-to-take-in-consider-1)
+  - [Pixy module](#pixy-module)
+    - [Functions & Pins](#functions--pins-2)
+    - [Its Function](#its-function-2)
+    - [Points to Take in Consider](#points-to-take-in-consider-2)
 
 # Future Engineers – WRO 2025
 
@@ -96,7 +100,7 @@ In the code digitalWrite(IN1, HIGH); digitalWrite(IN2, LOW); is used for forward
 
 **Power supply:** Motor motors can draw large currents and cause voltage dips.
 
-## Color Line module
+## Pixy module
 
 ### Functions & pins
 
