@@ -3,10 +3,20 @@ This repository contains **documentation, source code, team photos, vehicle phot
 ## Table of Contents  
 
 - [Future Engineers – WRO 2025](#future-engineers--wro-2025)
+- [Components](#components)
+  - [L298M Motor Driver x1](#l298m-motor-driver-x1)
+  - [Arduino Omega x1](#arduino-omega-x1)
+  - [MPU-6050 x1](#mpu-6050-x1)
+  - [Ultrasonic sensors HC-SR04 x3](#ultrasonic-sensors-hc-sr04-x3)
+  - [DC Motor (generic) x1](#dc-motor-generic-x1)
+  - [Servo Motor MG996R x1](#servo-motor-mg996r-x1)
+  - [Pixy 2.1 Camera](#pixy-21-camera)
+  - [9V Rechargeable Batteries x2](#9v-rechargeable-batteries-x2)
 - [CODE](#code)
   - [Sensors Module](#sensors-module)
   - [Motor Control Module](#motor-control-module)
-  - [Pixy module](#pixy-module)
+  - [Pixy Module](#pixy-module)
+
 
 # Future Engineers – WRO 2025
 
@@ -21,8 +31,9 @@ As part of the competition, teams are required to document their entire project 
 The project uses an Arduino Omega as the central controller, connected to an MPU6050 for motion sensing, three HC-SR04 ultrasonic sensors for obstacle detection, DC motors driven by an L298 module for movement, and a MG996R servo for steering. A Pixy 2.1 camera provides vision-based target tracking, while two 9V rechargeable batteries supply power to the system.
 
 ## L298M Motor Driver x1
-![alt text](Components\L298M_motor_driver.png)
+![L298M](Components/L298M_motor_driver.png)
 Specifications:
+---
 **Electrical Specs:**
 - Logic voltage (Vss): 4.5 V – 7 V 
 - Motor supply voltage (Vs): 5 V – 46 V V depending on version
@@ -36,7 +47,7 @@ Specifications:
 - Diodes: Built-in protection diodes for inductive loads (in most module versions)
 ---
 ## Arduino omega x1
-![alt text](Components\image-1.png)
+![Arduino Omega](Components/image-1.png)
 - Microcontroller: ATmega328P
 - Operating voltage: 5 V
 - Recommended input voltage: 7 – 12 V (limit 6 – 20 V)
@@ -49,7 +60,7 @@ Specifications:
 - Clock speed: 16 MHz
 ---
 ## MPU-6050 x1
-![alt text](Components\MPU-6050.png)
+![MPU6050](Components/MPU-6050.png)
 - Operating voltage: 3.3 – 5 V
 - Communication: I²C (SCL, SDA)
 - Accelerometer range: ±2g, ±4g, ±8g, ±16g
@@ -57,7 +68,7 @@ Specifications:
 - Extras: Motion detection, built-in temperature sensor
 ---
 ## Ultrasonic sensors HC-SR04 x3
-![alt text](Components\ultrasonic_sensors_HC-SR04.png)
+![Ultrasonic Sensor](Components/ultrasonic_sensors_HC-SR04.png)
 - Operating voltage: 5 V DC
 - Current draw: ~15 mA
 - Measuring angle: ~15°
@@ -67,7 +78,7 @@ Specifications:
 - Pins: VCC, GND, Trig, Echo
 ---
 ## DC Motor (generic) x1
-![alt text](Components\DC_motor.png)
+![DC Motor](Components/DC_motor.png)
 (values depend on model – comon ranges)
 - Rated voltage: 6 – 12 V
 - No-load current: 100 – 300 mA
@@ -75,7 +86,7 @@ Specifications:
 - Speed: 3000 – 10000 rpm @ 12 V
 ---
 ## Servo Motor MG996R x1
-![alt text](Components\servo_motor_MG996R.png)
+![MG996R Servo](Components/servo_motor_MG996R.png)
 - Operating voltage: 4.8 – 7.2 V
 - Stall torque:
 - 9.4 kg·cm @ 4.8 V
@@ -86,7 +97,7 @@ Specifications:
 - Weight: ~55 g
 ---
 ## Pixy 2.1 Camera
-![alt text](Components\pixy_2.1_camera.png)
+![Pixy 2.1 Camera](Components/pixy_2.1_camera.png)
 - Operating voltage: 5 V (typical consumption ~140 mA)
 - Image sensor: Omnivision OV9715 (1296 × 976 px)
 - Frame rate: 60 fps
@@ -94,7 +105,7 @@ Specifications:
 - Functions: Object recognition by color/shape, line tracking, color-code reading, servo output support
 ---
 ## 9V Rechargeable Batteries x2
-![alt text](Components\9V_recheargable_batteries.png.png)
+![9V Battery](Components/9V_rechargeable_batteries.png)
 - Nominal voltage: 9 V each
 - Configuration:
 - Series: 18 V total
