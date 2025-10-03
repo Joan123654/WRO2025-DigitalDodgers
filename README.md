@@ -5,17 +5,8 @@ This repository contains **documentation, source code, team photos, vehicle phot
 - [Future Engineers – WRO 2025](#future-engineers--wro-2025)
 - [CODE](#code)
   - [Sensors Module](#sensors-module)
-    - [Functions & Pins](#functions--pins)
-    - [Its Function](#its-function)
-    - [Points to Take in Consider](#points-to-take-in-consider)
   - [Motor Control Module](#motor-control-module)
-    - [Functions & Pins](#functions--pins-1)
-    - [Its Function](#its-function-1)
-    - [Points to Take in Consider](#points-to-take-in-consider-1)
   - [Pixy module](#pixy-module)
-    - [Functions & Pins](#functions--pins-2)
-    - [Its Function](#its-function-2)
-    - [Points to Take in Consider](#points-to-take-in-consider-2)
 
 # Future Engineers – WRO 2025
 
@@ -24,6 +15,93 @@ The Future Engineers category of the WRO 2025 focuses on developing real-world e
 Each year, the challenge changes, requiring teams not only to solve the current problem but also to adapt quickly to new scenarios and requirements. This helps participants learn how to think like engineers: iterating on their designs, testing solutions, and improving their approach as they go.
 
 As part of the competition, teams are required to document their entire project process in a GitHub repository. This includes sharing their design decisions, code, and testing results, as well as reflecting on what worked, what didn’t, and how their solution evolved over time. The documentation is an important part of the evaluation, as it demonstrates each team’s ability to communicate their engineering process clearly and professionally.
+
+# Components 
+
+The project uses an Arduino Omega as the central controller, connected to an MPU6050 for motion sensing, three HC-SR04 ultrasonic sensors for obstacle detection, DC motors driven by an L298 module for movement, and a MG996R servo for steering. A Pixy 2.1 camera provides vision-based target tracking, while two 9V rechargeable batteries supply power to the system.
+
+## L298M Motor Driver x1
+![alt text](Components\L298M_motor_driver.png)
+Specifications:
+**Electrical Specs:**
+- Logic voltage (Vss): 4.5 V – 7 V 
+- Motor supply voltage (Vs): 5 V – 46 V V depending on version
+- Output current: up to 2 A continuous, peak about 3 A 
+- Total power dissipation: ~25 W 
+**Performance:**
+- Number of channels: 2 (can drive 2 DC motors or 1 stepper motor)
+- Output type: Dual full H-bridge
+- Control inputs: TTL-compatible (high = 2.3 V+, low = 1.5 V max)
+- Enable pins: Allow PWM speed control
+- Diodes: Built-in protection diodes for inductive loads (in most module versions)
+---
+## Arduino omega x1
+![alt text](Components\image-1.png)
+- Microcontroller: ATmega328P
+- Operating voltage: 5 V
+- Recommended input voltage: 7 – 12 V (limit 6 – 20 V)
+- Digital I/O pins: 14 (6 PWM)
+- Analog input pins: 6
+- DC current per I/O pin: 40 mA max
+- Flash memory: 32 KB
+- SRAM: 2 KB
+- EEPROM: 1 KB
+- Clock speed: 16 MHz
+---
+## MPU-6050 x1
+![alt text](Components\MPU-6050.png)
+- Operating voltage: 3.3 – 5 V
+- Communication: I²C (SCL, SDA)
+- Accelerometer range: ±2g, ±4g, ±8g, ±16g
+- Gyroscope range: ±250, ±500, ±1000, ±2000 °/s
+- Extras: Motion detection, built-in temperature sensor
+---
+## Ultrasonic sensors HC-SR04 x3
+![alt text](Components\ultrasonic_sensors_HC-SR04.png)
+- Operating voltage: 5 V DC
+- Current draw: ~15 mA
+- Measuring angle: ~15°
+- Min. distance: 2 cm
+- Max. distance: 4 m
+- Accuracy: ±3 mm
+- Pins: VCC, GND, Trig, Echo
+---
+## DC Motor (generic) x1
+![alt text](Components\DC_motor.png)
+(values depend on model – comon ranges)
+- Rated voltage: 6 – 12 V
+- No-load current: 100 – 300 mA
+- Load current: 0.6 – 1 A (peak up to 2 A)
+- Speed: 3000 – 10000 rpm @ 12 V
+---
+## Servo Motor MG996R x1
+![alt text](Components\servo_motor_MG996R.png)
+- Operating voltage: 4.8 – 7.2 V
+- Stall torque:
+- 9.4 kg·cm @ 4.8 V
+- 11 kg·cm @ 6 V
+- Speed: 0.19 s/60° @ 6 V
+- Rotation angle: 120° (typical), some units up to 180°
+- Max current: 500 – 900 mA (stall peak up to 2.5 A)
+- Weight: ~55 g
+---
+## Pixy 2.1 Camera
+![alt text](Components\pixy_2.1_camera.png)
+- Operating voltage: 5 V (typical consumption ~140 mA)
+- Image sensor: Omnivision OV9715 (1296 × 976 px)
+- Frame rate: 60 fps
+- Interfaces: UART, SPI, I²C, USB
+- Functions: Object recognition by color/shape, line tracking, color-code reading, servo output support
+---
+## 9V Rechargeable Batteries x2
+![alt text](Components\9V_recheargable_batteries.png.png)
+- Nominal voltage: 9 V each
+- Configuration:
+- Series: 18 V total
+- Parallel: 9 V with double capacity
+- Typical capacity: 200 – 600 mAh (NiMH or Li-ion type)
+- Use case: Suitable for low-current loads; not ideal for high-drain motors
+---
 
 # CODE
 
