@@ -47,7 +47,7 @@ Specifications:
 - Diodes: Built-in protection diodes for inductive loads (in most module versions)
 ---
 ## Arduino omega x1
-![Arduino Omega](Components/image-1.png)
+![Arduino Omega](Components/arduino_omega.png)
 - Microcontroller: ATmega328P
 - Operating voltage: 5 V
 - Recommended input voltage: 7 – 12 V (limit 6 – 20 V)
@@ -79,7 +79,7 @@ Specifications:
 ---
 ## DC Motor (generic) x1
 ![DC Motor](Components/DC_motor.png)
-(values depend on model – comon ranges)
+**(values depend on model – comon ranges)**
 - Rated voltage: 6 – 12 V
 - No-load current: 100 – 300 mA
 - Load current: 0.6 – 1 A (peak up to 2 A)
