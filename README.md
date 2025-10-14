@@ -120,38 +120,47 @@ The code integrates three main types of sensors and multiple actuators to create
 
 Below each module is expanded with implementation details, rationale, pitfalls, and practical tips for tuning and testing.
 
-## Sensors module
-
+## LiDAR Sensors module
 ### Functions & pins
 
 `````
-// Front
-const int triggerPinFront = 7;  
-const int echoPinFront = 8;
-// Left
-const int triggerPinLeft = 24;  
-const int echoPinLeft = 22;
-// Right
-const int triggerPinRight = 40; 
-const int echoPinRight = 42;
+#include "Adafruit_VL53L1X.h"
+typedef Adafruit_VL53L1X liDar;
 
-long readDistance(int triggerPin, int echoPin) {
-  digitalWrite(triggerPin, LOW);
-  delayMicroseconds(2);
-  digitalWrite(triggerPin, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(triggerPin, LOW); 
+const int leftShut = 11;
+const int frontShut = 13;
+const int rightShut = 12;
 
-  float time = pulseIn(echoPin, HIGH);
-  float distance = (time/2)/29.1;
-  return distance;  
+liDar leftSensor = liDar(leftShut);
+liDar frontSensor = liDar(frontShut);
+liDar rightSensor = liDar(rightShut);
+
+long leftDist;
+long frontDist;
+long rightDist;
+
+int readDistance(Adafruit_VL53L1X &vl53) {
+  if (vl53.dataReady()) {
+    int distance = vl53.distance();
+    vl53.clearInterrupt();
+    return distance;
+  }
+  return -1;
+}
+
+void printDistances(long L, long F, long R) {
+  Serial.print("Left: ");  Serial.print(L);  Serial.print(" cm     |     ");
+  Serial.print("Front: "); Serial.print(F);  Serial.print(" cm     |     ");
+  Serial.print("Right: "); Serial.println(R);
 }
 `````
+
 ### Its function
 
-Each ultrasonic sensor (HC-SR04-style) measures distance to the nearest obstacle in its direction.
-
-readDistance(triggerPin, echoPin) emits an ultrasonic pulse (trigger), measures the echo time with pulseIn(), and converts the round-trip microsecond time into centimeters using the formula:
+Each LiDAR sensor (VL53L1X) measures the distance to the nearest obstacle using time-of-flight laser pulses instead of ultrasound.
+readDistance(vl53) checks if new data is available using dataReady(), retrieves the distance via distance(), and returns it in millimeters.
+If no valid reading is available, it returns -1.
+printDistances() displays the current distance readings of all three sensors (left, front, and right) in the Serial Monitor for debugging and calibration.
 
 distance_cm = (pulseTime_us / 2) / 29.1
 
