@@ -220,13 +220,51 @@ The servo module is responsible for steering control.
 setServo(ang) adjusts the servo position while ensuring smooth motion and avoiding excessive signal updates by adding a time interval (servoWriteInterval).
 The constrain() function limits the rotation range to safe mechanical angles.
 
-In the code digitalWrite(IN1, HIGH); digitalWrite(IN2, LOW); is used for forward direction only.
+## IMU (Gyroscope) module
+### Functions & pins
 
-### Points to take in consider
+`````
+#include <Wire.h>
+#include "MPU6050.h"
+MPU6050 mpu;
 
-**Power supply:** Motor motors can draw large currents and cause voltage dips.
+float angle = 0.0;
+float gyroZOffset = 0.0;
+unsigned long tPrevMicros;
+const float GYRO_SENS = 131.0;
+float initialAngle = 0;
+float angleDiff = 0;
 
-## Pixy module
+void updateAngle() {
+  int16_t ax, ay, az, gx, gy, gz;
+  mpu.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
+
+  unsigned long tNow = micros();
+  float dt = (tNow - tPrevMicros) / 1000000.0f;
+  tPrevMicros = tNow;
+
+  float velZ = (float)gz / GYRO_SENS - gyroZOffset;
+  angle = fmod(angle + velZ * dt + 360.0f, 360.0f);
+}
+
+void calibrarGiroZ(int samples) {
+  double sum = 0.0;
+  for (int i = 0; i < samples; i++) {
+    int16_t ax, ay, az, gx, gy, gz;
+    mpu.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
+    sum += (double)gz / GYRO_SENS;
+    delay(2);
+  }
+  gyroZOffset = sum / samples;
+  Serial.println("Gyro Z calibration completed");
+}
+`````
+
+### Its function
+
+The IMU module (MPU6050) continuously measures the robot’s angular velocity around the Z-axis to maintain orientation during motion and turns.
+updateAngle() integrates the gyroscope’s Z-axis readings to estimate current yaw (rotation).
+calibrarGiroZ(samples) averages multiple samples to calculate the gyro’s bias offset, improving accuracy and reducing drift.
 
 ### Functions & pins
 
