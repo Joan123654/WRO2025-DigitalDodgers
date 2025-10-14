@@ -292,18 +292,39 @@ void readButton() {
 The button acts as a start/stop controller for the robot.
 readButton() detects state changes with a debounce delay and toggles between startWorking() and stopWorking(), which control the activation of the movement modules and sensors.
 
-  miServo.write(servoAngle);
-  motorEncendido(velocidad);
+## PID Control module
+### Functions
 
-  // Debug
-  Serial.print("Error(px)="); Serial.print(error);
-  Serial.print(" -> Servo="); Serial.println(servoAngle);
+`````
+float Kp = 1.5;
+float Ki = 0.25;
+float Kd = 0.75;
+
+float integral = 0;
+float lastError = 0;
+float derivada = 0;
+unsigned long lastTime = 0;
+
+float centrado(long right, long left, long error) {
+  unsigned long time = millis();
+  float dt = (time - lastTime) / 1000.0f;
+  if (dt <= 0) dt = 0.001f;
+  lastTime = time;
+
+  integral += error * dt;
+  derivada = (error - lastError) / dt;
+  lastError = error;
+
+  float angulo = Kp * error + Ki * integral + Kd * derivada;
+  return (int)angulo;
 }
 `````
 
 ### Its function
 
-The **seguirConReferenciaX()** function enables the robot to follow colored blocks detected by the Pixy2 camera. It selects the largest block (the closest), identifies its color (red or green), and adjusts the robot’s steering to keep the block at a target position in the camera’s image. If the block is already at the target position, the robot moves straight; otherwise, it turns proportionally to correct its path. This allows the robot to navigate and avoid obstacles by following color cues.
+The PID control module calculates the corrective steering angle required to maintain equal distances between the left and right LiDAR sensors (centering behavior).
+The proportional, integral, and derivative terms (Kp, Ki, Kd) determine how quickly and smoothly the robot reacts to deviations.
+
 
 ### Points to take in consider
 
