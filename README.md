@@ -266,86 +266,31 @@ The IMU module (MPU6050) continuously measures the robot’s angular velocity ar
 updateAngle() integrates the gyroscope’s Z-axis readings to estimate current yaw (rotation).
 calibrarGiroZ(samples) averages multiple samples to calculate the gyro’s bias offset, improving accuracy and reducing drift.
 
+## Button Control module
 ### Functions & pins
 
 `````
-#define SIG_ROJO 1
-#define SIG_VERDE 2
+const int buttonPin = A0;
+int buttonOld = HIGH;
+int buttonNew;
+bool codeState = false;
 
-const int IMG_W = 320;
-const int IMG_CENTER_X = IMG_W / 2;   // 160 pixeles
-const int LEFT_TARGET_X  = 110;      // posición objetivo del centro del bloque cuando queremos que esté a la izquierda (ajustar en pruebas)
-const int RIGHT_TARGET_X = 210;      // posición objetivo cuando queremos que el bloque esté a la derecha
-const int DEADZONE_X = 12;           // tolerancia en píxeles (±). Ajustar: 6-20 según estabilidad
-const int MAX_TURN_ERROR = 160;      // rango máximo de error en px para mapear a ángulo (puede quedar 160)
-
-// --- Función principal de seguimiento con referencia X según color ---
-void seguirConReferenciaX() {
-  // Pedimos bloques de la Pixy
-  pixy.ccc.getBlocks();
-  if (pixy.ccc.numBlocks <= 0) {
-    // No detecta nada: recto
-    miServo.write(servoCenter);
-    motorEncendido(velocidad);
-    Serial.println("No block detected -> recto");
-    return;
+void readButton() {
+  buttonNew = digitalRead(buttonPin);
+  if (buttonNew == LOW && buttonOld == HIGH) {
+    delay(30);  // debounce
+    codeState = !codeState;
+    if (codeState) startWorking();
+    else stopWorking();
   }
+  buttonOld = buttonNew;
+}
+`````
 
-  // Elegir el bloque más grande (por área)
-  int best = 0;
-  long bestArea = 0;
-  for (int i = 0; i < pixy.ccc.numBlocks; i++) {
-    long area = (long)pixy.ccc.blocks[i].m_width * (long)pixy.ccc.blocks[i].m_height;
-    if (area > bestArea) {
-      bestArea = area;
-      best = i;
-    }
-  }
+## Its function
 
-  int sig = pixy.ccc.blocks[best].m_signature;       // firma de color
-  float bx = pixy.ccc.blocks[best].m_x;
-  float bw = pixy.ccc.blocks[best].m_width;
-  float cx = bx + bw/2.0;                            // centro X del bloque (0..319)
-
-  // determinar desiredX según el color:
-  float desiredX = IMG_CENTER_X; // fallback (centro)
-  if (sig == SIG_ROJO) {
-    // ROJO -> señal a la izquierda -> robot debe pasar por la derecha -> objetivo: bloque a la izquierda
-    desiredX = LEFT_TARGET_X;
-    Serial.print("ROJO -> targetX=");
-  } else if (sig == SIG_VERDE) {
-    // VERDE -> señal a la derecha -> robot pasa por la izquierda -> objetivo: bloque a la derecha
-    desiredX = RIGHT_TARGET_X;
-    Serial.print("VERDE -> targetX=");
-  } else {
-    Serial.print("SIGNATURE ");
-    Serial.print(sig);
-    Serial.print(" -> usar centro como targetX=");
-  }
-  Serial.print(desiredX);
-  Serial.print(" | cx=");
-  Serial.println(cx);
-
-  // error = cuánto hay que desplazar el centro del bloque hasta la referencia deseada
-  // positive -> cx está a la derecha del desiredX (hay que girar derecha)
-  // negative -> cx está a la izquierda del desiredX (hay que girar izquierda)
-  float error = cx - desiredX;
-
-  // zona muerta: si el error está dentro del rango, se considera "cumplido" y vamos rectos
-  if (abs(error) <= DEADZONE_X) {
-    // dentro de deadzone: recto y mantener velocidad
-    miServo.write(servoCenter);
-    motorEncendido(velocidad);
-    Serial.println("Dentro de deadzone -> recto y mantener");
-    return;
-  }
-
-  // fuera de deadzone -> corregir proporcionalmente
-  // mapeamos el error (-MAX_TURN_ERROR..+MAX_TURN_ERROR) a (servoLeft..servoRight)
-  // Nota: usamos map con enteros, convertimos error a int
-  int errInt = (int) constrain(error, -MAX_TURN_ERROR, MAX_TURN_ERROR);
-  int servoAngle = map(errInt, -MAX_TURN_ERROR, MAX_TURN_ERROR, servoLeft, servoRight);
-  servoAngle = constrain(servoAngle, min(servoLeft, servoRight), max(servoLeft, servoRight));
+The button acts as a start/stop controller for the robot.
+readButton() detects state changes with a debounce delay and toggles between startWorking() and stopWorking(), which control the activation of the movement modules and sensors.
 
   miServo.write(servoAngle);
   motorEncendido(velocidad);
