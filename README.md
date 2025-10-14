@@ -162,17 +162,30 @@ readDistance(vl53) checks if new data is available using dataReady(), retrieves 
 If no valid reading is available, it returns -1.
 printDistances() displays the current distance readings of all three sensors (left, front, and right) in the Serial Monitor for debugging and calibration.
 
-distance_cm = (pulseTime_us / 2) / 29.1
+## Motor Control module
+### Functions & pins
 
-(pulseIn returns microseconds; dividing by 2 accounts for the two-way trip; 29.1 μs/cm is the approximate time it takes sound to travel 1 cm at room temperature).
+`````
+const int IN3 = 32;
+const int IN4 = 34;
+const int ENB = 2;
 
-### Points to take in consider
+void motor(int in3, int in4, int speed) {
+  digitalWrite(IN3, in3);
+  digitalWrite(IN4, in4);
+  analogWrite(ENB, speed);
+}
+`````
 
-**Range & placement:** Sensor blind zones (very near objects) and wide-beam angles affect readings.
+### Its function
 
-**Multiple Readings:** If all sensors triggers simultaneously, echoes can be mixed up.
+The motor control module drives a DC motor using two digital direction pins (IN3, IN4) and one PWM-enabled speed pin (ENB).
+motor(in3, in4, speed) defines direction and speed based on logic levels:
 
-## Motor control module
+IN3 = HIGH, IN4 = LOW → forward rotation.
+
+IN3 = LOW, IN4 = HIGH → reverse rotation.
+The speed is controlled by analogWrite(ENB, speed) (0–255 PWM).
 
 ### Functions & pins
 
