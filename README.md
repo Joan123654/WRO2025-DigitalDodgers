@@ -325,11 +325,56 @@ float centrado(long right, long left, long error) {
 The PID control module calculates the corrective steering angle required to maintain equal distances between the left and right LiDAR sensors (centering behavior).
 The proportional, integral, and derivative terms (Kp, Ki, Kd) determine how quickly and smoothly the robot reacts to deviations.
 
+## Overall Logic (Main Loop)
 
-### Points to take in consider
+`````
+enum {AVANZAR, GIRAR};
+int estado = AVANZAR;
 
+void loop() {
+  readButton();
+  if (!codeState) {
+    setServo(servoCenter);
+    stopWorking();
+    delay(200);
+    return;
+  }
 
-**Lighting conditions:** The Pixy2 camera’s color detection can be affected by changes in ambient light. Consistent lighting improves reliability.
-**Deadzone tuning:** Adjust the **DEADZONE_X** value for stability. Too small may cause constant steering corrections; too large may reduce accuracy.
-**Camera alignment:** The Pixy2 should be mounted so its field of view matches the robot’s forward direction for correct block positioning.
+  leftDist = readDistance(leftSensor); 
+  frontDist = readDistance(frontSensor);
+  rightDist = readDistance(rightSensor);
+  printDistances(leftDist, frontDist, rightDist);
+  
+  updateAngle();
 
+  switch (estado) {
+    case AVANZAR:
+      motor(1, 0, normalSpeed);
+      centering(leftDist, rightDist);
+      if (frontDist <= umbralFrontal && frontDist >= 0) {
+        turnServoTarget = checkTurn(leftDist, rightDist);
+        initialAngle = angle;
+        estado = GIRAR;
+      }
+    break;
+
+    case GIRAR:
+      setServo(turnServoTarget);
+      angleDiff = abs(shortAngleDiff(initialAngle, angle));
+      if (angleDiff >= 90) {
+        estado = AVANZAR;
+      }
+    break;
+  }
+}
+`````
+
+### Its function
+
+The main control loop alternates between two states:
+
+AVANZAR (Forward): Moves straight, continuously centering between walls.
+
+GIRAR (Turn): Executes a 90° turn when a front obstacle is detected.
+
+The transition between states depends on the front LiDAR threshold (umbralFrontal) and gyroscope feedback.
