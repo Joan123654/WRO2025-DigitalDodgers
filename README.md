@@ -187,23 +187,38 @@ IN3 = HIGH, IN4 = LOW → forward rotation.
 IN3 = LOW, IN4 = HIGH → reverse rotation.
 The speed is controlled by analogWrite(ENB, speed) (0–255 PWM).
 
+## Servo Steering module
 ### Functions & pins
 
 `````
-const int IN1 = 28;   
-const int IN2 = 30;   
-const int ENA = 3;
+#include <Servo.h>
+Servo servo;
 
-void motorEncendido(int speed) {
-  digitalWrite(IN1, HIGH);
-  digitalWrite(IN2, LOW);  
-  analogWrite(ENA, speed); 
+const int pinServo = 19;
+const int servoCenter = 85;
+const int servoLeft = 45;
+const int servoRight = 110;
+
+int ultimoAngulo = -1;
+unsigned long lastServoWrite = 0;
+const unsigned long servoWriteInterval = 80;  // ms
+
+void setServo(int ang) {
+  ang = constrain(ang, servoLeft, servoRight);
+  unsigned long now = millis();
+  if (ang != ultimoAngulo && (now - lastServoWrite) >= servoWriteInterval) {
+    servo.write(ang);
+    ultimoAngulo = ang;
+    lastServoWrite = now;
+  }
 }
 `````
 
 ### Its function
 
-motorEncendido(int speed) sets the direction pins and uses analogWrite(ENA, speed) to control motor speed via PWM.
+The servo module is responsible for steering control.
+setServo(ang) adjusts the servo position while ensuring smooth motion and avoiding excessive signal updates by adding a time interval (servoWriteInterval).
+The constrain() function limits the rotation range to safe mechanical angles.
 
 In the code digitalWrite(IN1, HIGH); digitalWrite(IN2, LOW); is used for forward direction only.
 
