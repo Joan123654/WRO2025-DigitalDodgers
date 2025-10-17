@@ -49,7 +49,15 @@ The project uses an Arduino Omega as the central controller, connected to an MPU
 - Overcurrent protection
 - Thermal shutdown
 ---
-## Arduino omega x1
+## LM2596 DC-DC Buck Converter x1
+![Buck Converter](Components\buck_converter.png)
+**Electrical Specs:**
+- Input voltage range: 4.5V to 40V
+- Output voltage range: 1.5V to 35V
+- Load current: 3A - absolute rating.
+- Dimensions: 21mm x 44mm x 14mm
+---
+## Arduino Mega x1
 ![Arduino Omega](Components/arduino_omega.png)
 - Microcontroller: ATmega328P
 - Operating voltage: 5 V
