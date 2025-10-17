@@ -35,21 +35,19 @@ As part of the competition, teams are required to document their entire project 
 
 The project uses an Arduino Omega as the central controller, connected to an MPU6050 for motion sensing, three HC-SR04 ultrasonic sensors for obstacle detection, DC motors driven by an L298 module for movement, and a MG996R servo for steering. A Pixy 2.1 camera provides vision-based target tracking, while two 9V rechargeable batteries supply power to the system.
 
-## L298M Motor Driver x1
-![L298M](Components/L298M_motor_driver.png)
-Specifications:
 ---
+## Adafruit DRV8871 DC Motor Driver x1
+![DRV8871 DC Motor Driver](Components\DRV8871_DC_motor_driver.png)
 **Electrical Specs:**
-- Logic voltage (Vss): 4.5 V – 7 V 
-- Motor supply voltage (Vs): 5 V – 46 V V depending on version
-- Output current: up to 2 A continuous, peak about 3 A 
-- Total power dissipation: ~25 W 
-**Performance:**
-- Number of channels: 2 (can drive 2 DC motors or 1 stepper motor)
-- Output type: Dual full H-bridge
-- Control inputs: TTL-compatible (high = 2.3 V+, low = 1.5 V max)
-- Enable pins: Allow PWM speed control
-- Diodes: Built-in protection diodes for inductive loads (in most module versions)
+- 6.5V to 45V motor power voltage
+- Up to 5.5V logic level on IN pins
+- 565mΩ Typical RDS(on) (high + low)
+- 3.6A peak current
+- PWM control
+- Current limiting/regulation without an inline sense resistor
+- Undervoltage lockout
+- Overcurrent protection
+- Thermal shutdown
 ---
 ## Arduino omega x1
 ![Arduino Omega](Components/arduino_omega.png)
