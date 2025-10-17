@@ -37,7 +37,7 @@ The project uses an Arduino Omega as the central controller, connected to an MPU
 
 ---
 ## Adafruit DRV8871 DC Motor Driver x1
-![DRV8871 DC Motor Driver](Components\DRV8871_DC_motor_driver.png)
+![DRV8871 DC Motor Driver](Components/DRV8871_DC_motor_driver.png)
 **Electrical Specs:**
 - 6.5V to 45V motor power voltage
 - Up to 5.5V logic level on IN pins
@@ -50,7 +50,7 @@ The project uses an Arduino Omega as the central controller, connected to an MPU
 - Thermal shutdown
 ---
 ## LM2596 DC-DC Buck Converter x1
-![Buck Converter](Components\buck_converter.png)
+![Buck Converter](Components/buck_converter.png)
 **Electrical Specs:**
 - Input voltage range: 4.5V to 40V
 - Output voltage range: 1.5V to 35V
@@ -81,7 +81,7 @@ The project uses an Arduino Omega as the central controller, connected to an MPU
 - Extras: Motion detection, built-in temperature sensor
 ---
 ## TOF400C Laser Ranging Sensor x3
-![TOF400C Laser Ranging Sensor](Components\TOF400C_laser_ranging_sensor.png)
+![TOF400C Laser Ranging Sensor](Components/TOF400C_laser_ranging_sensor.png)
 **Electrical Specs:**
 - Range: 4 to 400 cm
 - Dead zone: 0 to 4 cm
@@ -127,7 +127,7 @@ The project uses an Arduino Omega as the central controller, connected to an MPU
 - Functions: Object recognition by color/shape, line tracking, color-code reading, servo output support
 ---
 ## Samsung Li-Ion Battery x4
-![Samsung Li-Ion Battery](image.png)
+![Samsung Li-Ion Battery](Components/samsung_Li-Ion_battery.png)
 **Electrical Specs:**
 - Capacity: 2500 mAh
 - Unprotected INR Cell
