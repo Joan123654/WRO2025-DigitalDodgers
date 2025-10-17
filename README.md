@@ -98,6 +98,7 @@ The project uses an Arduino Omega as the central controller, connected to an MPU
 ---
 ## DC Motor (generic) x1
 ![DC Motor](Components/DC_motor.png)
+**Electrical Specs:**
 **(values depend on model – comon ranges)**
 - Rated voltage: 6 – 12 V
 - No-load current: 100 – 300 mA
@@ -106,6 +107,7 @@ The project uses an Arduino Omega as the central controller, connected to an MPU
 ---
 ## Servo Motor MG996R x1
 ![MG996R Servo](Components/servo_motor_MG996R.png)
+**Electrical Specs:**
 - Operating voltage: 4.8 – 7.2 V
 - Stall torque:
 - 9.4 kg·cm @ 4.8 V
@@ -117,6 +119,7 @@ The project uses an Arduino Omega as the central controller, connected to an MPU
 ---
 ## Pixy 2.1 Camera
 ![Pixy 2.1 Camera](Components/pixy_2.1_camera.png)
+**Electrical Specs:**
 - Operating voltage: 5 V (typical consumption ~140 mA)
 - Image sensor: Omnivision OV9715 (1296 × 976 px)
 - Frame rate: 60 fps
