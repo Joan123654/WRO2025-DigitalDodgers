@@ -59,6 +59,7 @@ The project uses an Arduino Omega as the central controller, connected to an MPU
 ---
 ## Arduino Mega x1
 ![Arduino Omega](Components/arduino_omega.png)
+**Electrical Specs:**
 - Microcontroller: ATmega328P
 - Operating voltage: 5 V
 - Recommended input voltage: 7 – 12 V (limit 6 – 20 V)
@@ -72,21 +73,28 @@ The project uses an Arduino Omega as the central controller, connected to an MPU
 ---
 ## MPU-6050 x1
 ![MPU6050](Components/MPU-6050.png)
+**Electrical Specs:**
 - Operating voltage: 3.3 – 5 V
 - Communication: I²C (SCL, SDA)
 - Accelerometer range: ±2g, ±4g, ±8g, ±16g
 - Gyroscope range: ±250, ±500, ±1000, ±2000 °/s
 - Extras: Motion detection, built-in temperature sensor
 ---
-## Ultrasonic sensors HC-SR04 x3
-![Ultrasonic Sensor](Components/ultrasonic_sensors_HC-SR04.png)
-- Operating voltage: 5 V DC
-- Current draw: ~15 mA
-- Measuring angle: ~15°
-- Min. distance: 2 cm
-- Max. distance: 4 m
-- Accuracy: ±3 mm
-- Pins: VCC, GND, Trig, Echo
+## TOF400C Laser Ranging Sensor x3
+![TOF400C Laser Ranging Sensor](Components\TOF400C_laser_ranging_sensor.png)
+**Electrical Specs:**
+- Range: 4 to 400 cm
+- Dead zone: 0 to 4 cm
+- Interface: I2C
+- Programmable I2C address (default 0x52)
+- Viewing Angle (FOV): 27°
+- Ranging frequency: 50 Hz
+- 1D gesture detection capability
+- Protective cover
+- Two M2 mounting holes
+- Power supply: 3 to 5 V
+- Current consumption: 40 mA
+- Working temperature: -20 to 70°C
 ---
 ## DC Motor (generic) x1
 ![DC Motor](Components/DC_motor.png)
