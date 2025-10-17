@@ -126,14 +126,23 @@ The project uses an Arduino Omega as the central controller, connected to an MPU
 - Interfaces: UART, SPI, I²C, USB
 - Functions: Object recognition by color/shape, line tracking, color-code reading, servo output support
 ---
-## 9V Rechargeable Batteries x2
-![9V Battery](Components/9V_rechargeable_batteries.png)
-- Nominal voltage: 9 V each
-- Configuration:
-- Series: 18 V total
-- Parallel: 9 V with double capacity
-- Typical capacity: 200 – 600 mAh (NiMH or Li-ion type)
-- Use case: Suitable for low-current loads; not ideal for high-drain motors
+## Samsung Li-Ion Battery x4
+![Samsung Li-Ion Battery](image.png)
+**Electrical Specs:**
+- Capacity: 2500 mAh
+- Unprotected INR Cell
+- Chemistry: LiNiMnCoO2 (Lithium Iron Phosphate With Nickel/Manganese Oxide Cathode)
+- Dimensions:
+  - Diameter: 18.33 + / - 0.07mm
+  - Height: 64.85 + / - 0.15mm
+- Weight: 45.0g
+- Nominal Voltage: Average 3.7V
+- Maximum Continuous Discharge: 20A (At 25 Degrees Celsius)
+- Cut-off Voltage: 2.5V
+- Internal Impedance: ≤ m18Ω
+- Cycle life: > 250 cycles
+- Charge: 1.25A, 4.20V,CCCV 125mA cut-off
+- Discharge: 0.2C, 2.5V discharge cut-off
 ---
 
 # CODE
