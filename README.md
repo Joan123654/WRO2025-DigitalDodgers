@@ -51,6 +51,7 @@ The project uses an Arduino Omega as the central controller, connected to an MPU
 ---
 ## LM2596 DC-DC Buck Converter x1
 ![Buck Converter](Components/buck_converter.png)
+
 **Electrical Specs:**
 - Input voltage range: 4.5V to 40V
 - Output voltage range: 1.5V to 35V
@@ -59,6 +60,7 @@ The project uses an Arduino Omega as the central controller, connected to an MPU
 ---
 ## Arduino Mega x1
 ![Arduino Omega](Components/arduino_omega.png)
+
 **Electrical Specs:**
 - Microcontroller: ATmega328P
 - Operating voltage: 5 V
@@ -73,6 +75,7 @@ The project uses an Arduino Omega as the central controller, connected to an MPU
 ---
 ## MPU-6050 x1
 ![MPU6050](Components/MPU-6050.png)
+
 **Electrical Specs:**
 - Operating voltage: 3.3 – 5 V
 - Communication: I²C (SCL, SDA)
@@ -98,6 +101,7 @@ The project uses an Arduino Omega as the central controller, connected to an MPU
 ---
 ## DC Motor (generic) x1
 ![DC Motor](Components/DC_motor.png)
+
 **Electrical Specs:**
 **(values depend on model – comon ranges)**
 - Rated voltage: 6 – 12 V
@@ -107,6 +111,7 @@ The project uses an Arduino Omega as the central controller, connected to an MPU
 ---
 ## Servo Motor MG996R x1
 ![MG996R Servo](Components/servo_motor_MG996R.png)
+
 **Electrical Specs:**
 - Operating voltage: 4.8 – 7.2 V
 - Stall torque:
@@ -119,6 +124,7 @@ The project uses an Arduino Omega as the central controller, connected to an MPU
 ---
 ## Pixy 2.1 Camera
 ![Pixy 2.1 Camera](Components/pixy_2.1_camera.png)
+
 **Electrical Specs:**
 - Operating voltage: 5 V (typical consumption ~140 mA)
 - Image sensor: Omnivision OV9715 (1296 × 976 px)
