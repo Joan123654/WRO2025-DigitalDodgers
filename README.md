@@ -13,7 +13,7 @@ This repository contains **documentation, source code, team photos, vehicle phot
   - [Pixy 2.1 Camera](#pixy-21-camera)
   - [9V Rechargeable Batteries x2](#9v-rechargeable-batteries-x2)
 - [CODE](#code)
-  - [LiDAR Sensors Module](#lidar-sensors-module)
+  - [Ultrasonic Sensors Module](#ultrasonic-sensors-module)
   - [Motor Control Module](#motor-control-module)
   - [Servo Steering Module](#servo-steering-module)
   - [IMU (Gyroscope) Module](#imu-gyroscope-module)
@@ -152,47 +152,48 @@ The code integrates three main types of sensors and multiple actuators to create
 
 Below each module is expanded with implementation details, rationale, pitfalls, and practical tips for tuning and testing.
 
-## LiDAR Sensors module
+## Ultrasonic Sensors Module
 ### Functions & pins
 
 `````
-#include "Adafruit_VL53L1X.h"
-typedef Adafruit_VL53L1X liDar;
+// ------------------------Sensores ultrasónicos -------------------------
+const int triggerPinRight = 8;    
+const int echoPinRight = 9;
 
-const int leftShut = 11;
-const int frontShut = 13;
-const int rightShut = 12;
+const int triggerPinFront = 11;   
+const int echoPinFront = 10;
 
-liDar leftSensor = liDar(leftShut);
-liDar frontSensor = liDar(frontShut);
-liDar rightSensor = liDar(rightShut);
+const int triggerPinLeft = ;    
+const int echoPinLeft = 12;
 
-long leftDist;
-long frontDist;
-long rightDist;
+long leftDist, frontDist, rightDist;
 
-int readDistance(Adafruit_VL53L1X &vl53) {
-  if (vl53.dataReady()) {
-    int distance = vl53.distance();
-    vl53.clearInterrupt();
-    return distance;
-  }
-  return -1;
+long readDistance(int trigPin, int echoPin) {
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW); 
+
+  float time = pulseIn(echoPin, HIGH, 30000);  // Timeout de 30ms
+  float distance = (time / 2.0) / 29.1;        // Conversión a cm
+
+  Serial.print(distance); Serial.println(" cm");
+  return distance;
 }
 
 void printDistances(long L, long F, long R) {
-  Serial.print("Left: ");  Serial.print(L);  Serial.print(" cm     |     ");
-  Serial.print("Front: "); Serial.print(F);  Serial.print(" cm     |     ");
-  Serial.print("Right: "); Serial.println(R);
+  Serial.print("Left: ");  Serial.print(L); Serial.print(" cm     |     ");
+  Serial.print("Front: "); Serial.print(F); Serial.print(" cm     |     ");
+  Serial.print("Right: "); Serial.print(R); Serial.println(" cm");
 }
 `````
 
 ### Its function
 
-Each LiDAR sensor (VL53L1X) measures the distance to the nearest obstacle using time-of-flight laser pulses instead of ultrasound.
-readDistance(vl53) checks if new data is available using dataReady(), retrieves the distance via distance(), and returns it in millimeters.
+Each ultrasonic sensor measures the distance to the nearest obstacle using ultrasound.
 If no valid reading is available, it returns -1.
-printDistances() displays the current distance readings of all three sensors (left, front, and right) in the Serial Monitor for debugging and calibration.
+printDistances() displays the current distance readings of all three sensors (left, front, and right) (that its latter converted to cm using float distance = (time / 2.0) / 29.1.) in the Serial Monitor for debugging and calibration.
 
 ## Motor Control module
 ### Functions & pins
