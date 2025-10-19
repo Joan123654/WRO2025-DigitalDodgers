@@ -8,7 +8,6 @@ This repository contains **documentation, source code, team photos, vehicle phot
   - [Arduino Omega x1](#arduino-omega-x1)
   - [MPU-6050 x1](#mpu-6050-x1)
   - [Ultrasonic Sensors HC-SR04 x3](#ultrasonic-sensors-hc-sr04-x3)
-  - [LiDAR Sensors VL53L1X x3](#lidar-sensors-vl53l1x-x3)
   - [DC Motor (generic) x1](#dc-motor-generic-x1)
   - [Servo Motor MG996R x1](#servo-motor-mg996r-x1)
   - [Pixy 2.1 Camera](#pixy-21-camera)
